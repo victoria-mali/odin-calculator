@@ -1,3 +1,12 @@
+const btnsDigit = document.querySelectorAll(".btn-digit");
+const calculation = document.querySelector(".calculation");
+const currentNum = document.querySelector(".current");
+const btnOperator = document.querySelectorAll(".btn-operator");
+const equal = document.querySelector("#equal");
+let operator;
+let num1;
+let num2;
+
 const add = function(a, b) {
     return a + b;
 };
@@ -22,16 +31,13 @@ const operate = function(operator, num1, num2) {
         return add(num1, num2);
     } else if (operator === "-") {
         return subtract(num1, num2);
-    } else if (operator === "*") {
+    } else if (operator === "×") {
         return multiply(num1, num2);
-    } else if (operator === "/") {
+    } else if (operator === "÷") {
         return divide(num1, num2);
     }
 };
 
-
-const btnsDigit = document.querySelectorAll(".btn-digit");
-const currentNum = document.querySelector(".current");
 
 let numStr = "";
 btnsDigit.forEach((btn) => {
@@ -41,22 +47,26 @@ btnsDigit.forEach((btn) => {
     })
 });
 
-const btnOperator = document.querySelectorAll(".btn-operator");
 
-let operator;
-let num1;
 btnOperator.forEach((btn) => {
     btn.addEventListener("click", (event) => {
         operator = event.target.textContent;
-        currentNum.textContent = "";
         num1 = numStr;
+        calculation.textContent = num1 + " " + operator;
+
+        btnsDigit.forEach((btn) => {
+            btn.addEventListener("click", (event) => {
+                num2 = event.target.textContent;
+                calculation.textContent += " " + num2;
+    })
+});
         numStr = "";
     })
 });
 
-const equal = document.querySelector("#equal");
 
 equal.addEventListener("click", () => {
     let result = operate(operator, num1, numStr);
     currentNum.textContent = result;
+    calculation.textContent += " = " + result;
 })
