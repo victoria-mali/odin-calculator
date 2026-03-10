@@ -27,3 +27,20 @@ const operate = function(operator, num1, num2) {
         divide(num1, num2);
     }
 };
+
+
+const btnsDigit = document.querySelectorAll(".btn-digit");
+const currentNum = document.querySelector(".current");
+
+const updateNum1 = function(num1) {
+    btnsDigit.forEach((btn) => {
+        btn.addEventListener("click", () => {
+           // currentNum.textContent = btn.id;
+            num1 = btn.id;
+            currentNum.textContent = num1;
+            console.log(num1);
+        })
+    })
+}
+
+updateNum1();
