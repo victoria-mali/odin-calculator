@@ -7,3 +7,8 @@
 6. The value gets stored in variable num 2
 7. When the user presses equals button
 8. The function using all three variables executes and prints the result
+
+
+1. when a user presses operator button, the current string value gets stored in num1, and the string is emptied
+2. when a user presses digits again, the string gets filled again 
+3. and we capture the value for num2 - 

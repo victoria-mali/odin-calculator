@@ -40,10 +40,16 @@ const operate = function(operator, num1, num2) {
 
 
 let numStr = "";
+
 btnsDigit.forEach((btn) => {
     btn.addEventListener("click", (event) => {
         numStr += event.target.textContent;
         currentNum.textContent = numStr;
+        num2 = numStr;
+
+        if (calculation.textContent.includes(operator)) {
+            calculation.textContent += event.target.textContent;
+        }
     })
 });
 
@@ -52,21 +58,14 @@ btnOperator.forEach((btn) => {
     btn.addEventListener("click", (event) => {
         operator = event.target.textContent;
         num1 = numStr;
-        calculation.textContent = num1 + " " + operator;
-
-        btnsDigit.forEach((btn) => {
-            btn.addEventListener("click", (event) => {
-                num2 = event.target.textContent;
-                calculation.textContent += " " + num2;
-    })
-});
+        calculation.textContent = num1 + " " + operator + " ";
         numStr = "";
     })
 });
 
 
 equal.addEventListener("click", () => {
-    let result = operate(operator, num1, numStr);
+    let result = operate(operator, num1, num2);
     currentNum.textContent = result;
     calculation.textContent += " = " + result;
 })
