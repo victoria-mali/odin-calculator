@@ -24,6 +24,10 @@ body {
 }
 
 .display {
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #fffcf0;
     padding: 12px;
     text-align: right;

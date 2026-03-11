@@ -1,4 +1,5 @@
 const btnsDigit = document.querySelectorAll(".btn-digit");
+const btnClear = document.querySelector(".btn-clear");
 const calculation = document.querySelector(".calculation");
 const currentNum = document.querySelector(".current");
 const btnOperator = document.querySelectorAll(".btn-operator");
@@ -6,6 +7,9 @@ const equal = document.querySelector("#equal");
 let operator;
 let num1;
 let num2;
+let result;
+let numStr = "";
+let res1;
 
 const add = function(a, b) {
     return a + b;
@@ -20,29 +24,39 @@ const multiply = function(a, b) {
 };
 
 const divide = function(a, b) {
+    if (b === 0) {
+        return "Error";
+    } else 
     return a / b;
 };
 
 
 const operate = function(operator, num1, num2) {
-    num1 = parseInt(num1);
-    num2 = parseInt(num2);
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
     if (operator === "+") {
-        return add(num1, num2);
+        return Math.round((add(num1, num2) + Number.EPSILON) * 100) / 100;
     } else if (operator === "-") {
-        return subtract(num1, num2);
+        return Math.round((subtract(num1, num2) + Number.EPSILON) * 100) / 100;
     } else if (operator === "×") {
-        return multiply(num1, num2);
+        return Math.round((multiply(num1, num2) + Number.EPSILON) * 100) / 100;
     } else if (operator === "÷") {
-        return divide(num1, num2);
+        return Math.round((divide(num1, num2) + Number.EPSILON) * 100) / 100;
     }
 };
 
 
-let numStr = "";
 
 btnsDigit.forEach((btn) => {
     btn.addEventListener("click", (event) => {
+        if (calculation.textContent.includes("=")) {
+            num1 = "";
+            num2 = "";
+            numStr = "";
+            calculation.textContent = "";
+            currentNum.textContent = "";  
+        }
+        
         numStr += event.target.textContent;
         currentNum.textContent = numStr;
         num2 = numStr;
@@ -56,16 +70,34 @@ btnsDigit.forEach((btn) => {
 
 btnOperator.forEach((btn) => {
     btn.addEventListener("click", (event) => {
+        if (calculation.textContent.includes(operator)) {
+            result = operate(operator, num1, num2);
+            res1 = result;
+            currentNum.textContent= res1;
+        }
+        
         operator = event.target.textContent;
         num1 = numStr;
-        calculation.textContent = num1 + " " + operator + " ";
+
+        if (res1) {
+            num1 = res1;
+            calculation.textContent = res1 + " " + operator + " ";
+        } else {
+            calculation.textContent = num1 + " " + operator + " ";
+        }
         numStr = "";
     })
 });
 
-
 equal.addEventListener("click", () => {
-    let result = operate(operator, num1, num2);
+    result = operate(operator, num1, num2);
     currentNum.textContent = result;
     calculation.textContent += " = " + result;
-})
+});
+
+btnClear.addEventListener("click", () => {
+    numStr = "";
+    currentNum.textContent = "";
+    calculation.textContent = "";
+});
+
