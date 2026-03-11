@@ -12,3 +12,12 @@
 1. when a user presses operator button, the current string value gets stored in num1, and the string is emptied
 2. when a user presses digits again, the string gets filled again 
 3. and we capture the value for num2 - 
+
+
+
+1. typing 10 (num1 = undefined, num2 = 10, result = undefined, res1 = undefined)
+2. typing + (num1 = "10", num2 = "10", result = undefined, res1 = undefined)
+3. typing 5 (num1 = "10", num2 = "5", result = undefined, res1 = undefined)
+4. typing = (num1 = "10", num2 = "5", result = 15, res1 = undefined)
+5. typing + again (num1 = 15, num2 = "5", result = 15, res1 = 15) (the screen shows calculation 15 + and 5 in the currentNum - should show 15 - now showing num2, should show num1) fixed
+

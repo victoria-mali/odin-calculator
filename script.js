@@ -74,15 +74,17 @@ btnOperator.forEach((btn) => {
         if (calculation.textContent.includes(operator)) {
             result = operate(operator, num1, num2);
             res1 = result;
-            currentNum.textContent= res1;
+            currentNum.textContent = res1;
         }
         
         operator = event.target.textContent;
         num1 = numStr;
+        currentNum.textContent = num1;
 
         if (res1) {
             num1 = res1;
             calculation.textContent = res1 + " " + operator + " ";
+            currentNum.textContent = num1;
         } else {
             calculation.textContent = num1 + " " + operator + " ";
         }
@@ -97,6 +99,7 @@ equal.addEventListener("click", () => {
     currentNum.textContent = result;
     calculation.textContent += " = " + result;
 });
+
 
 btnClear.addEventListener("click", () => {
     num1 = "";
