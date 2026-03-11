@@ -54,6 +54,7 @@ btnsDigit.forEach((btn) => {
             num2 = "";
             numStr = "";
             previousResult = "";
+            result = undefined;
             calculation.textContent = "";
             currentNum.textContent = "";  
         }
@@ -72,7 +73,6 @@ btnsDigit.forEach((btn) => {
 btnOperator.forEach((btn) => {
     btn.addEventListener("click", (event) => {
 
-
          //if after num1 we press operator, and then another operator, we need to only change the operator and nothing else
         // if the str is empty (meaning we already pressed operator before), and previousResult wasn't saved
         // we only change the operator and text on display
@@ -83,7 +83,6 @@ btnOperator.forEach((btn) => {
             return;
         }
 
-        
         // make new calculation using result of the first calc 
         // if there's already an operator on display and str is empty,
         // it makes an operation with 
@@ -93,8 +92,6 @@ btnOperator.forEach((btn) => {
                 result = operate(operator, num1, num2);
                 previousResult = result;
         }
-
-
 
         //captures operator, assigns str content to num1, prints num1 on display,
         // prints num1 + operator on display, empties the string.
@@ -119,9 +116,27 @@ btnOperator.forEach((btn) => {
 
 
 equal.addEventListener("click", () => {
+    if (calculation.textContent.includes("=")) {
+        return
+    }
+
+
+    if (operator === "" || operator === undefined || numStr === "") {
+    num1 = "";
+    num2 = "";
+    operator = "";
+    previousResult = "";
+    numStr = "";
+    result = "";
+    currentNum.textContent = "";
+    calculation.textContent = "";
+    return
+    }
+
     result = operate(operator, num1, num2);
     currentNum.textContent = result;
     calculation.textContent += " = " + result;
+
 });
 
 
@@ -131,6 +146,7 @@ btnClear.addEventListener("click", () => {
     operator = "";
     previousResult = "";
     numStr = "";
+    result = "";
     currentNum.textContent = "";
     calculation.textContent = "";
 });
