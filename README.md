@@ -21,3 +21,7 @@
 4. typing = (num1 = "10", num2 = "5", result = 15, res1 = undefined)
 5. typing + again (num1 = 15, num2 = "5", result = 15, res1 = 15) (the screen shows calculation 15 + and 5 in the currentNum - should show 15 - now showing num2, should show num1) fixed
 
+
+solve the problem if a user enters one number and then presses operator
+- now it takes the number as num1 and num2 and makes an operation.
+- how it should behave: if there's only num1, it should not run operate function, but instead it should just change the chosen operator to a new one
