@@ -53,6 +53,7 @@ btnsDigit.forEach((btn) => {
             num1 = "";
             num2 = "";
             numStr = "";
+            res1 = "";
             calculation.textContent = "";
             currentNum.textContent = "";  
         }
@@ -85,9 +86,11 @@ btnOperator.forEach((btn) => {
         } else {
             calculation.textContent = num1 + " " + operator + " ";
         }
+
         numStr = "";
     })
 });
+
 
 equal.addEventListener("click", () => {
     result = operate(operator, num1, num2);
@@ -96,6 +99,10 @@ equal.addEventListener("click", () => {
 });
 
 btnClear.addEventListener("click", () => {
+    num1 = "";
+    num2 = "";
+    operator = "";
+    res1 = "";
     numStr = "";
     currentNum.textContent = "";
     calculation.textContent = "";
