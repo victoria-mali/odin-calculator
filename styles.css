@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     font-family: sans-serif;
+    color: #182316;
 }
 
 body {
@@ -11,8 +12,10 @@ body {
 .container {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 12px;
 }
 
 .calculator {
@@ -79,4 +82,17 @@ button:focus {
     flex-basis: 150px;
 }
 
+.copyright {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
 
+.copyright img {
+    width: 25px;
+    transition: all 0.3s ease-in-out 0s; 
+}
+
+.copyright img:hover {
+    transform: rotate(360deg);
+}

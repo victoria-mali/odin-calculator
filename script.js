@@ -182,5 +182,7 @@ document.addEventListener("keydown", function (event) {
         btnClear.click();
     } else if (event.key === "Enter") {
         equal.click();
+    } else if (event.key === ".") {
+        btnDecimal.click();
     }
 })
