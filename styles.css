@@ -67,6 +67,10 @@ button:disabled {
     color: black;
 }
 
+button:focus {
+    outline: none;
+}
+
 .btn-L {
     flex-basis: 110px;
 }
