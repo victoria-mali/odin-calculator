@@ -63,6 +63,10 @@ button:hover {
     background-color: #f2eddb;
 }
 
+button:disabled {
+    color: black;
+}
+
 .btn-L {
     flex-basis: 110px;
 }
@@ -70,4 +74,5 @@ button:hover {
 .btn-XL {
     flex-basis: 150px;
 }
+
 

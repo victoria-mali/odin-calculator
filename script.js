@@ -4,6 +4,8 @@ const calculation = document.querySelector(".calculation");
 const currentNum = document.querySelector(".current");
 const btnOperator = document.querySelectorAll(".btn-operator");
 const equal = document.querySelector("#equal");
+const btnDecimal = document.querySelector(".btn-decimal");
+const btnDel = document.querySelector(".btn-delete");
 let operator;
 let num1;
 let num2;
@@ -31,9 +33,12 @@ const divide = function(a, b) {
 };
 
 
+
+
 const operate = function(operator, num1, num2) {
     num1 = parseFloat(num1);
     num2 = parseFloat(num2);
+    const divisionResult = divide(num1, num2);
     if (operator === "+") {
         return Math.round((add(num1, num2) + Number.EPSILON) * 100) / 100;
     } else if (operator === "-") {
@@ -41,12 +46,14 @@ const operate = function(operator, num1, num2) {
     } else if (operator === "×") {
         return Math.round((multiply(num1, num2) + Number.EPSILON) * 100) / 100;
     } else if (operator === "÷") {
+        if (divisionResult === "Error") {
+            return "Error";
+        }
         return Math.round((divide(num1, num2) + Number.EPSILON) * 100) / 100;
     }
 };
 
-
-
+let lastInput;
 btnsDigit.forEach((btn) => {
     btn.addEventListener("click", (event) => {
         if (calculation.textContent.includes("=")) {
@@ -65,6 +72,7 @@ btnsDigit.forEach((btn) => {
 
         if (calculation.textContent.includes(operator)) {
             calculation.textContent += event.target.textContent;
+            lastInput = event.target.textContent;
         }
     })
 });
@@ -72,6 +80,7 @@ btnsDigit.forEach((btn) => {
 
 btnOperator.forEach((btn) => {
     btn.addEventListener("click", (event) => {
+        btnDecimal.disabled = false;
 
          //if after num1 we press operator, and then another operator, we need to only change the operator and nothing else
         // if the str is empty (meaning we already pressed operator before), and previousResult wasn't saved
@@ -101,6 +110,7 @@ btnOperator.forEach((btn) => {
         calculation.textContent = num1 + " " + operator + " ";
 
 
+
         //if we captured a value in previousResult, it's going to use it for num1
         // it prints new num1 and operator
         // current number becomes result of previous operation
@@ -116,10 +126,10 @@ btnOperator.forEach((btn) => {
 
 
 equal.addEventListener("click", () => {
+    btnDecimal.disabled = false;
     if (calculation.textContent.includes("=")) {
         return
     }
-
 
     if (operator === "" || operator === undefined || numStr === "") {
     num1 = "";
@@ -150,3 +160,27 @@ btnClear.addEventListener("click", () => {
     currentNum.textContent = "";
     calculation.textContent = "";
 });
+
+btnDecimal.addEventListener("click", () => {
+    if (currentNum.textContent.includes(".")) {
+        btnDecimal.disabled = true;
+}})
+
+
+ btnDel.addEventListener("click", () => {
+    if (currentNum.textContent !== "") {
+        console.log("ho");
+        numStr = numStr.slice(0, -1);
+        num2 = numStr;
+        currentNum.textContent = numStr;
+    } 
+    if ((calculation.textContent.includes(operator)) && (numStr !== "")) {
+        console.log("hey");
+        calculation.textContent = calculation.textContent.slice(0, -1);
+        return;
+    }
+})
+
+
+
+ //there's a bug after pressing clear button, calculation.textContent start updating as i type
